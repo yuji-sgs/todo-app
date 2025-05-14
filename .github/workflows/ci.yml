@@ -1,0 +1,31 @@
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches: [main, test/**]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set up environment variables
+        run: |
+          echo "NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321" >> .env.test
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=mock-anon-key" >> .env.test
+
+      - name: Run tests
+        run: npm test
