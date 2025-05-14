@@ -31,7 +31,7 @@ const TodoApp = () => {
     };
 
     return <section className="text-center mb-2 test-2xl font-medium">
-        <h3>Supabase Todo App</h3>
+        <h3 className="font-semibold">Supabase Todo App</h3>
         <form onSubmit={(e) => handleSubmit(e)}>
             <input 
                 type="text" 
